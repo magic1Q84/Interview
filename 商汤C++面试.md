@@ -1,10 +1,15 @@
-### 1、知道threadlocal吗，是什么？
+### 1、gdb是什么？用过么
+显然我没用过...
 
-threadlocal而是一个线程内部的存储类，可以在指定线程内存储数据，数据存储以后，只有指定线程可以得到存储数据，官方解释如下。
+经过一顿百度后
 
-    This class provides thread-local variables.  These variables differ from
-    their normal counterparts in that each thread that accesses one (via its
-    {@code get} or {@code set} method) has its own, independently initialized
-    copy of the variable.  {@code ThreadLocal} instances are typically private
-    static fields in classes that wish to associate state with a thread (e.g.,
-    a user ID or Transaction ID).
+GDB是一个Linux常用的调试工具（没有图形化界面的23333）基本上和在IDE里调试区别不大（我猜的）<br/>
+1、启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。<br/>
+2、可让被调试的程序在你所指定的调置的断点处停住。（断点可以是条件表达式）<br/>
+3、当程序被停住时，可以检查此时你的程序中所发生的事。<br/>
+4、动态的改变你程序的执行环境。
+
+暂时先写这写，之后用到了再来补充
+
+### 2、说一下生产者消费者模型
+这个模型的核心是通过一个容器来解决生产者消费者之间强耦合的问题。生产者和消费者之间并不直接通信，而是通过一个阻塞队列来完成交互，所以生产者生产完数据之后不用等待消费者处理，直接扔给阻塞队列，消费者不找生产者要数据，而是直接从阻塞队列里取，阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。
