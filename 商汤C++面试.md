@@ -151,6 +151,48 @@ lambda表达式的基本格式如下：
   
 移动语义中不创建新的变量的方法就是进行右值引用
 
+完美转发是指函数模板可以转缺的转发参数的值，不改变其左值右值的属性
 
+## 12、c++模板
+模板是泛型编程的基础，泛型编程即以一种独立于任何特定类型的方式编写代码。
 
-
+### 函数模板：
+    写法大概是这样
+    template <typename T>
+    inline T const& Max (T const& a, T const& b) 
+    { 
+        return a < b ? b:a; 
+    } 
+    T感觉类似于auto?
+    
+    测试了一下这样可以：
+    inline auto const& Max (T const& a, T const& b)
+    {
+        return a < b ? b:a;
+    }
+    但这样不行：
+    inline auto const& Max (auto const& a, auto const& b)
+    {
+        return a < b ? b:a;
+    }
+### 类模板
+    这么弄
+    template <class T>
+    class Stack { 
+    private: 
+        vector<T> elems;     // 元素 
+    public: 
+        void push(T const&);  // 入栈
+        void pop();               // 出栈
+        T top() const;            // 返回栈顶元素
+        bool empty() const{       // 如果为空则返回真。
+            return elems.empty(); 
+        } 
+    }; 
+ 
+    template <class T>
+    void Stack<T>::push (T const& elem) 
+    { 
+        // 追加传入元素的副本
+        elems.push_back(elem);    
+    } 
